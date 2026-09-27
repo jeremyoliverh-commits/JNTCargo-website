@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargo & Express â€” Beranda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            height: 56px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-brand {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            user-select: none;
+            font-weight: 400;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .nav-brand .nav-cargo { color: #16a34a; }
+        .nav-brand .nav-express { color: #dc2626; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 6px 0;
+            transition: all 0.25s ease;
+            letter-spacing: 0.3px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: #dc2626;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover { color: #1a1a1a; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-links a.active { color: #1a1a1a; font-weight: 600; }
+        .nav-links a.active::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px; height: 2px;
+            background: #1a1a1a;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* ========== HOME PAGE ========== */
+        .home-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: 56px;
+        }
+
+        .home-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fafafa;
+            overflow: hidden;
+        }
+
+        /* ========== BRUSH LABELS (full edge-to-edge, no gap) ========== */
+        .brush-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 100%;
+            cursor: pointer;
+            gap: 4px;
+            padding: 0 32px;
+        }
+
+        .brush-label .label-logo {
+            height: clamp(64px, 7vw, 88px);
+            flex-shrink: 0;
+        }
+
+        .brush-label .label-quote {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(14px, 1.8vw, 18px);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .brush-label.cargo {
+            background: #009345;
+        }
+
+        .brush-label.express {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
+
+        .brush-label:hover {
+            filter: brightness(1.1);
+        }
+
+        .brush-label:active {
+            filter: brightness(0.95);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .navbar { height: 52px; }
+            .nav-container { padding: 0 16px; height: 52px; }
+            .nav-brand { font-size: 22px; }
+
+            .brush-label {
+                gap: 8px;
+                padding: 0 16px;
+            }
+            .brush-label .label-logo { height: 40px; }
+            .brush-label .label-quote { font-size: 12px; }
+
+            .nav-links {
+                position: fixed;
+                top: 52px; left: 0; width: 100%;
+                background: #fff;
+                flex-direction: column;
+                padding: 12px 20px;
+                gap: 0;
+                border-bottom: 1px solid #e5e5e5;
+                transform: translateY(-120%);
+                transition: transform 0.35s ease;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+                z-index: 999;
+            }
+
+            .nav-links.open { transform: translateY(0); }
+            .nav-links a { width: 100%; padding: 13px 4px; border-bottom: 1px solid #f5f5f5; font-size: 15px; }
+            .nav-links a::after { display: none; }
+            .hamburger { display: flex; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand"><span class="nav-cargo">Cargo</span> & <span class="nav-express">Express</span></a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Beranda</a></li>
+                <li><a href="tentang-kami.html">Tentang Kami</a></li>
+                <li><a href="hubungi-kami.html">Hubungi Kami</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==================== HOME PAGE ==================== -->
+    <div class="home-wrapper">
+        <section class="home-section">
+            <a href="cargo-info.html" class="brush-label cargo" style="gap:0;">
+                <img class="label-logo" src="logo-jnt-cargo-removebg-preview.png" alt="J&T Cargo" style="width:clamp(240px,26vw,340px);height:auto;">
+                <span class="label-quote" style="margin-top:-14px;">Paket besar, cari J&T Cargo</span>
+            </a>
+            <a href="express-info.html" class="brush-label express" style="gap:2px;">
+                <img class="label-logo" src="img/express-logo-cropped.png" alt="J&T Express" style="filter:brightness(0)invert(1);width:clamp(240px,27vw,360px);height:auto;">
+                <span class="label-quote" style="margin-top:0;">Express your online business</span>
+            </a>
+        </section>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => { navLinks.classList.remove('open'); });
+        });
+    </script>
+
+</body>
+</html>

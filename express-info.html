@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J&T Express — Info Lengkap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(160deg, #dc2626 0%, #b91c1c 40%, #991b1b 100%);
+            color: #fff;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .nav-brand {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 1px;
+            color: #fff;
+            text-decoration: none;
+            user-select: none;
+            font-weight: 400;
+        }
+
+        .nav-brand .nav-cargo { color: #6ee7b7; }
+        .nav-brand .nav-express { color: #fca5a5; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 6px 0;
+            transition: all 0.25s ease;
+            letter-spacing: 0.3px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-links a.active { color: #fff; font-weight: 600; }
+        .nav-links a.active::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+            position: absolute;
+            right: 24px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px; height: 2px;
+            background: #fff;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* ========== FEATURE ICONS ========== */
+        .feature-icons {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-top: 48px;
+            padding: 32px 0;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .feature-icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        .feature-icon-item:hover { opacity: 1; }
+
+        .feature-icon-item img {
+            width: 48px;
+            height: 48px;
+            filter: brightness(0) invert(1);
+        }
+
+        .feature-icon-item span {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        /* ========== CONTENT ========== */
+        .content-section {
+            padding: 120px 32px 80px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover { color: #fff; }
+
+        .page-icon { font-size: 64px; margin-bottom: 20px; }
+
+        .page-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(48px, 7vw, 72px);
+            letter-spacing: 3px;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            opacity: 0.85;
+            margin-bottom: 48px;
+            font-weight: 400;
+        }
+
+        .info-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-block {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 28px 32px;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .info-block:hover {
+            background: rgba(255,255,255,0.18);
+            transform: translateX(4px);
+        }
+
+        .info-block h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .info-block p {
+            font-size: 14px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: rgba(0,0,0,0.2);
+            padding: 40px 32px;
+            text-align: center;
+        }
+
+        .footer-content { max-width: 600px; margin: 0 auto; }
+        .footer-brand {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        .footer-address { font-size: 14px; opacity: 0.7; line-height: 1.6; }
+        .footer-divider { width: 60px; height: 2px; background: rgba(255,255,255,0.3); margin: 20px auto; border-radius: 1px; }
+        .footer-copy { font-size: 12px; opacity: 0.5; }
+
+        @media (max-width: 768px) {
+            .nav-container { justify-content: flex-start; padding: 0 60px 0 24px; }
+            .nav-links {
+                position: fixed;
+                top: 60px; left: 0; width: 100%;
+                background: #b91c1c;
+                flex-direction: column;
+                padding: 16px 24px;
+                gap: 0;
+                transform: translateY(-120%);
+                transition: transform 0.35s ease;
+                z-index: 999;
+            }
+            .nav-links.open { transform: translateY(0); }
+            .nav-links a { width: 100%; padding: 14px 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .nav-links a::after { display: none; }
+            .hamburger { display: flex; }
+            .content-section { padding: 100px 24px 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand"><span class="nav-cargo">Cargo</span> & <span class="nav-express">Express</span></a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="tentang-kami.html">Tentang Kami</a></li>
+                <li><a href="hubungi-kami.html">Hubungi Kami</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="content-section">
+        <a href="index.html" class="back-link">← Kembali ke Beranda</a>
+        <h1 class="page-title" style="color:#fca5a5;">Express</h1>
+        <p class="page-subtitle">Express Your Online Business — Layanan pengiriman ekspres #1 di Indonesia. Melayani pengiriman paket kecil hingga sedang dengan proses cepat, aman, dan terpercaya.</p>
+
+        <div class="info-blocks">
+            <div class="info-block">
+                <h3>Pick Up</h3>
+                <p>Layanan penjemputan paket langsung dari lokasi Anda. Gratis tanpa minimum berat, jumlah, dan jarak. Cukup pesan melalui aplikasi dan kurir kami akan menjemput.</p>
+            </div>
+            <div class="info-block">
+                <h3>Drop Off</h3>
+                <p>Anda juga bisa mengantar paket langsung ke drop point terdekat. Temukan lokasi drop point melalui fitur Find Drop Point di website atau aplikasi kami.</p>
+            </div>
+            <div class="info-block">
+                <h3>Trace & Track</h3>
+                <p>Sistem pelacakan real-time pertama di Indonesia. Pantau status dan posisi kiriman Anda kapan saja melalui website atau aplikasi J&T Express.</p>
+            </div>
+            <div class="info-block">
+                <h3>Shipping Rates</h3>
+                <p>Cek tarif pengiriman dengan mudah. Harga transparan dan kompetitif untuk pengiriman domestik ke seluruh Indonesia.</p>
+            </div>
+            <div class="info-block">
+                <h3>International Shipping</h3>
+                <p>J&T Express kini melayani pengiriman ke lebih dari 60 negara. Solusi tepat untuk ekspansi bisnis online Anda ke pasar global dengan layanan terintegrasi.</p>
+            </div>
+            <div class="info-block">
+                <h3>EZ (Reguler)</h3>
+                <p>Layanan pengiriman reguler dengan estimasi 2-7 hari kerja ke seluruh Indonesia. Pilihan ekonomis untuk kebutuhan pengiriman harian Anda.</p>
+            </div>
+            <div class="info-block">
+                <h3>ECO (Ekonomis)</h3>
+                <p>Layanan hemat dengan estimasi 1-3 hari. Mencakup Jawa, Bali, Kalimantan, Sumatra, Sulawesi, dan Batam. Cocok untuk efisiensi biaya.</p>
+            </div>
+            <div class="info-block">
+                <h3>100 Juta+ Paket per Hari</h3>
+                <p>J&T Express telah melampaui rata-rata volume pengiriman harian 100 juta paket di Q2 2026. Bukti kepercayaan pelanggan terhadap layanan kami.</p>
+            </div>
+        </div>
+
+        <div class="feature-icons">
+            <div class="feature-icon-item">
+                <img src="img/feature1.png" alt="Order">
+                <span>Order</span>
+            </div>
+            <div class="feature-icon-item">
+                <img src="img/feature2.png" alt="Real Time Tracking">
+                <span>Real Time Tracking</span>
+            </div>
+            <div class="feature-icon-item">
+                <img src="img/feature3.png" alt="Drop Point Nearby">
+                <span>Drop Point Nearby</span>
+            </div>
+            <div class="feature-icon-item">
+                <img src="img/feature4.png" alt="Shipping Rates">
+                <span>Shipping Rates</span>
+            </div>
+            <div class="feature-icon-item">
+                <img src="img/feature5.png" alt="Download App">
+                <span>Download App</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">J&T Cargo & Express</div>
+            <p class="footer-address">4FH8+6M Kepatihan, Ponorogo Regency, East Java</p>
+            <div class="footer-divider"></div>
+            <p class="footer-copy">&copy; 2026 J&T Cargo &amp; Express. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => { navLinks.classList.remove('open'); });
+        });
+    </script>
+</body>
+</html>
